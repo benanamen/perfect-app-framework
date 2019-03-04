@@ -1,0 +1,24 @@
+{
+  "name": "krubio/perfect-app-framework",
+  "description": "A Proprietary Non-Opinionated Framework Implementing Best Practices",
+  "license": "proprietary",
+  "keywords": ["perfect-app-framework"],
+  "authors": [
+    {
+      "name": "Kevin Rubio",
+      "email": "krubio@galaxyinternet.us"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*",
+	"php": "7.2.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  },
+  "autoload": {
+    "psr-4": {
+      "PerfectApp\\": "src/"
+    }
+  }
+}
