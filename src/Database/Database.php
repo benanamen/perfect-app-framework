@@ -2,19 +2,23 @@
 
 namespace PerfectApp\Database;
 
+use PDO;
+
 /**
  * Class Database
  * @package PerfectApp\Database
  */
-class Database extends \PDO
+class Database extends PDO
 {
     /**
      * Database constructor.
-     * @param array $config
+     * @param $dsn
+     * @param null $username
+     * @param null $password
      * @param array $options
      */
-    public function __construct(array $config, array $options = array())
+    public function __construct($dsn, $username = NULL, $password = NULL, $options = [])
     {
-        parent::__construct($config['db_type'] . ':host=' . $config['db_host'] . ';dbname=' . $config['db_name'], $config['db_username'], $config['db_password'], $options);
+        parent::__construct($dsn, $username, $password, $options);
     }
 }
