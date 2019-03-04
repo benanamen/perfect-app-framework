@@ -24,10 +24,3 @@ class MysqlConnection implements ConnectionInterface
         return new PDO($dsn, DB_USER, DB_PASSWORD, $opt);
     }
 }
-
-define('DB_TYPE', 'mysql'); // Database Type
-define('DB_NAME', 'perfect_app'); // Database Name
-define('DB_USER', 'root'); // Database Username
-define('DB_PASSWORD', ''); // Database Password
-define('DB_HOST', 'localhost'); // Database Hostname
-define('DB_CHARSET', 'utf8mb4'); // Database Charset
