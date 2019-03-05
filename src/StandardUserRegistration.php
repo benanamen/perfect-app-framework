@@ -42,9 +42,11 @@ class StandardUserRegistration implements UserRegistration
      * @param $to
      * @param $username
      * @param $password
+     * @param $url
+     * @param $admin_email
      * @return mixed|void
      */
-    public function register($firstName, $lastName, $to, $username, $password)
+    public function register($firstName, $lastName, $to, $username, $password, $url, $admin_email)
     {
         $raw_token = openssl_random_pseudo_bytes(16);
         $encoded_token = bin2hex($raw_token);
@@ -66,8 +68,8 @@ class StandardUserRegistration implements UserRegistration
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$firstName, $lastName, $to, $username, password_hash($password, PASSWORD_DEFAULT), $token_hash]);
 
-            $message = "Click to activate account\r\n" . APPLICATION_URL . "/activate.php?k=$encoded_token";
-            $this->mailSubmissionAgent->send($to, 'Confirm Email', $message, ADMIN_EMAIL_FROM);
+            $message = "Click to activate account\r\n" . $url . "/activate.php?k=$encoded_token";
+            $this->mailSubmissionAgent->send($to, 'Confirm Email', $message, $admin_email);
 
             header("Location: ./login.php?action=confirm");
             die;

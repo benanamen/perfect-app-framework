@@ -8,14 +8,15 @@ namespace PerfectApp;
  */
 interface UserRegistration
 {
-
     /**
      * @param $firstName
      * @param $lastName
      * @param $to
      * @param $username
      * @param $password
+     * @param $url
+     * @param $admin_email
      * @return mixed
      */
-    public function register($firstName, $lastName, $to, $username, $password);
+    public function register($firstName, $lastName, $to, $username, $password, $url, $admin_email);
 }
