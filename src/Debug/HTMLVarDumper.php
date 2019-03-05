@@ -6,19 +6,25 @@ namespace PerfectApp\Debug;
  * Class HTMLVarDumper
  * @package PerfectApp\Debug
  */
-class HTMLVarDumper implements VarDumper
+class HTMLVarDumper
 {
-
     /**
-     * @param string $title
      * @param array $data
-     * @return mixed|void
      */
-    public function dump(string $title, array $data)
+    public function dump(array $data)
     {
-        echo '<pre><span style="color:red;font-weight:bold">';
-        echo $title . '<br>';
-        print_r($data);
-        echo '</span></pre>';
+        echo '<span style="color:red;font-weight:bold">';
+
+        foreach ($data as $k => $v)
+        {
+            foreach ($v as $k2 => $v2)
+            {
+                if ($k2)
+                {
+                    echo $k . '<pre>', print_r($v2, true), '</pre>';
+                }
+            }
+        }
+        echo '</span>';
     }
 }
