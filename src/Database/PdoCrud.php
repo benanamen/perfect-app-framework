@@ -148,25 +148,23 @@ class PdoCrud
         $this->query($query, $fields);
     }
 
+    /**
+     * @param $fields
+     */
     public function update($fields)
     {
         // KR From https://phpdelusions.net/pdo/sql_injection_example
-        //$params = [];
-        $setStr = "";
-        $allowed = ["first_name", "last_name"];
-        foreach ($allowed as $key)
+        $params = [];
+        $setStr = '';
+        foreach ($fields as $key => $value)
         {
-            if (isset($fields[$key]) && $key != "id")
+            if ($key != "id")
             {
-                $setStr .= "`" . str_replace("`", "``", $key) . "` = :" . $key . ",";
-                $params[$key] = $fields[$key];
+                $setStr .= "`".str_replace("`", "``", $key)."` = :".$key.",";
             }
+            $params[$key] = $value;
         }
         $setStr = rtrim($setStr, ",");
-        $params['id'] = $fields['id'];
-
-        //var_dump($params);
-        //var_dump($setStr);
         $this->pdo->prepare("UPDATE {$this->table} SET $setStr WHERE {$this->primaryKey} = :id")->execute($params);
     }
 
