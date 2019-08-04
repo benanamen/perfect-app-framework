@@ -56,7 +56,7 @@ class PdoCrud
     {
         $query = 'SELECT * FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :value';
         $parameters = ['value' => $value];
-        $query = $this->query($query, $parameters);
+        $query = $this->prepareQuery($query, $parameters);
         return $query->fetchObject($this->className, $this->constructorArgs);
     }
 
@@ -65,7 +65,7 @@ class PdoCrud
      * @param array $parameters
      * @return bool|\PDOStatement
      */
-    public function query($sql, $parameters = [])
+    public function prepareQuery($sql, $parameters = [])
     {
         $query = $this->pdo->prepare($sql);
         $query->execute($parameters);
@@ -106,7 +106,7 @@ class PdoCrud
 
         $fields = $this->processDates($fields);
 
-        $this->query($query, $fields);
+        $this->prepareQuery($query, $fields);
     }
 
     /**
@@ -145,7 +145,7 @@ class PdoCrud
 
         $fields['primaryKey'] = $id;
         $fields = $this->processDates($fields);
-        $this->query($query, $fields);
+        $this->prepareQuery($query, $fields);
     }
 
     /**
@@ -174,6 +174,6 @@ class PdoCrud
     public function delete($id)
     {
         $parameters = [':id' => $id];
-        $this->query('DELETE FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :id', $parameters);
+        $this->prepareQuery('DELETE FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :id', $parameters);
     }
 }
