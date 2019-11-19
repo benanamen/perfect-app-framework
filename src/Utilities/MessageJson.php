@@ -11,29 +11,29 @@ class MessageJson implements MessageDisplay
     /**
      * @var ActionMessages
      */
-    protected $action;
+    protected $allStatusMessages;
 
     /**
      * MessageJson constructor.
-     * @param ActionMessages $action
+     * @param ActionMessages $allStatusMessages Array of all status's & Messages
      */
-    public function __construct(ActionMessages $action)
+    public function __construct(ActionMessages $allStatusMessages)
     {
-        $this->action = $action;
+        $this->allStatusMessages = $allStatusMessages;
     }
 
     /**
-     * @param $action
+     * @param string $action
      * @return string
      */
-    public function render($action): string
+    final public function render(string $action): string
     {
-        $action = $this->action->getStatus($action);
+        $statusMessage = $this->allStatusMessages->getStatus($action);
 
         return <<<JSON
             {
-                "message": {$action['message']},
-                "status": {$action['status']}
+                "message": {$statusMessage['message']},
+                "status": {$statusMessage['status']}
             }
 JSON;
     }

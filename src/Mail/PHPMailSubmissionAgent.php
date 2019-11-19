@@ -4,7 +4,7 @@ namespace PerfectApp\Mail;
 
 /**
  * Class PHPMailSubmissionAgent
- * @package krubio\Mail
+ * @package PerfectApp\Mail
  */
 class PHPMailSubmissionAgent implements MailSubmissionAgent
 {
@@ -13,9 +13,10 @@ class PHPMailSubmissionAgent implements MailSubmissionAgent
      * @param string $subject
      * @param string $message
      * @param string $from
+     * @return bool
      */
-    public function send($to, $subject, $message, $from)
+    final public function send(string $to, string $subject, string $message, string $from): bool
     {
-        mail($to, $subject, $message, "From: $from");
+        return mail($to, $subject, $message, "From: $from");
     }
 }

@@ -3,15 +3,21 @@
 namespace PerfectApp\Mail;
 
 
+/**
+ * Interface MailSubmissionAgent
+ * @package PerfectApp\Mail
+ */
 interface MailSubmissionAgent
 {
+
     /**
      * Sends an e-mail to a single address
      *
-     * @param $to      string the receiver address
-     * @param $subject string the mail subject
-     * @param $message    string the mail body
-     * @param $from    string the sender address
+     * @param string $to the receiver address
+     * @param string $subject the mail subject
+     * @param string $message the mail body
+     * @param string $from the sender address
+     * @return bool
      */
-    public function send($to, $subject, $message, $from);
+    public function send(string $to, string $subject, string $message, string $from): bool;
 }

@@ -23,10 +23,10 @@ class ActionMessages
     }
 
     /**
-     * @param $actions
-     * @return mixed|null
+     * @param string $actions
+     * @return array|null
      */
-    public function getStatus($actions)
+    final public function getStatus(string $actions): ?array
     {
         return $this->actions[$actions] ?? null;
     }

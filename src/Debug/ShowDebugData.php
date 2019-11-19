@@ -12,7 +12,7 @@ class ShowDebugData
      * @param HTMLVarDumper $varDumper
      * @param array|null $var
      */
-    public static function displayDebugData(HTMLVarDumper $varDumper, array $var = null)
+    public static function displayDebugData(HTMLVarDumper $varDumper, array $var = null) :void
     {
         echo '<div class="error_custom"><H1>DEBUGGING IS ON !!!</H1></div>';
         $varDumper->dump($var);

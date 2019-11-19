@@ -11,7 +11,7 @@ class HTMLVarDumper
     /**
      * @param array $data
      */
-    public function dump(array $data)
+    final public function dump(array $data): void
     {
         echo '<span style="color:red;font-weight:bold">';
 

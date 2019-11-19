@@ -17,11 +17,10 @@ class Route
      * @var string
      */
     private $includePath;
-
     /**
      * @var array
      */
-    private $allowedFiles = [];
+    private $allowedFiles;
 
     /**
      * Route constructor.
@@ -39,11 +38,11 @@ class Route
     /**
      * @return string
      */
-    public function getPage()
+    final public function getPage(): string
     {
         $pageBaseName = basename($this->page);
 
-        if (in_array($pageBaseName, $this->allowedFiles) && file_exists($this->includePath . $pageBaseName . '.php'))
+        if (in_array($pageBaseName, $this->allowedFiles, true) && file_exists($this->includePath . $pageBaseName . '.php'))
         {
             return $pageBaseName . '.php';
         }

@@ -2,14 +2,14 @@
 
 namespace PerfectApp\Logging;
 
-use \PDO;
+use PDO;
 
 /** Test - Usage
-require('../config.php');
-$test = new SQLLoginAttemptsLog($pdo);
-$test->logFailedAttempt('hacker');
-$test->logSuccessfulAttempt('gooduser');
-*/
+ * require('../config.php');
+ * $test = new SQLLoginAttemptsLog($pdo);
+ * $test->logFailedAttempt('hacker');
+ * $test->logSuccessfulAttempt('gooduser');
+ */
 
 /**
  * Reference https://forums.phpfreaks.com/topic/302286-oop-code-review/?hl=%2Boop#entry1538069
@@ -33,27 +33,28 @@ class SQLLoginAttemptsLog implements LoginLogger
     /**
      * Log failed login attempt
      * @param string $username
+     * @return bool
      */
-    public function logFailedAttempt($username)
+    final public function logFailedAttempt(string $username): bool
     {
-        $this->logAttempt($username, false);
+        return $this->logAttempt($username, false);
     }
 
     /**
-     * Log successful login attempt
      * @param string $username
+     * @return bool
      */
-    public function logSuccessfulAttempt($username)
+    final public function logSuccessfulAttempt(string $username): bool
     {
-        $this->logAttempt($username, true);
+        return $this->logAttempt($username, true);
     }
 
     /**
-     * Insert login attempt status
-     * @param string  $username
-     * @param boolean $successful
+     * @param string $username
+     * @param bool $successful
+     * @return bool
      */
-    protected function logAttempt($username, $successful)
+    private function logAttempt(string $username, bool $successful): bool
     {
         $attemptStmt = $this->database->prepare('
             INSERT INTO
@@ -61,6 +62,6 @@ class SQLLoginAttemptsLog implements LoginLogger
             VALUES
               (?, INET_ATON(?), ?, NOW())
         ');
-        $attemptStmt->execute([($successful ? 1 : 0), $_SERVER['REMOTE_ADDR'], $username]);
+        return $attemptStmt->execute([($successful ? 1 : 0), $_SERVER['REMOTE_ADDR'], $username]);
     }
 }

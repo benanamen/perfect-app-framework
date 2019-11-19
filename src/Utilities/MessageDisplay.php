@@ -12,5 +12,5 @@ interface MessageDisplay
      * @param $action
      * @return string
      */
-    public function render($action): string;
+    public function render(string $action): string;
 }

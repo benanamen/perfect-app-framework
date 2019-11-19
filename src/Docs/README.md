@@ -5,13 +5,13 @@ To use Debug add the following to global config
 // Debugging
 //----------------------------------------------------------------------------------------
 
-define("DEBUG", true); // Toggle Debugging
-define("SHOW_DEBUG_PARAMS", true); // Display Sql & Sql Parameters
-define("SHOW_SESSION_DATA", true); // Display Session Data
-define("SHOW_POST_DATA", true); // Display Post Data
-define("SHOW_GET_DATA", true); // Display Get Data
-define("SHOW_COOKIE_DATA", false); // Display Cookie Data
-define("SHOW_REQUEST_DATA", false); // Display Request Data
+define('DEBUG', true); // Toggle Debugging
+define('SHOW_DEBUG_PARAMS', true); // Display Sql & Sql Parameters
+define('SHOW_SESSION_DATA', true); // Display Session Data
+define('SHOW_POST_DATA', true); // Display Post Data
+define('SHOW_GET_DATA', true); // Display Get Data
+define('SHOW_COOKIE_DATA', false); // Display Cookie Data
+define('SHOW_REQUEST_DATA', false); // Display Request Data
 
 if (DEBUG)
 {

@@ -2,6 +2,9 @@
 
 namespace PerfectApp\Database;
 
+use DateTime;
+use PDO;
+use PDOStatement;
 
 /**
  * Class PdoCrud
@@ -10,7 +13,7 @@ namespace PerfectApp\Database;
 class PdoCrud
 {
     /**
-     * @var \PDO
+     * @var PDO
      */
     private $pdo;
     /**
@@ -31,15 +34,14 @@ class PdoCrud
     private $constructorArgs;
 
     /**
-     * DatabaseTable constructor.
-     *
-     * @param \PDO $pdo
+     * PdoCrud constructor.
+     * @param PDO $pdo
      * @param string $table
      * @param string $primaryKey
      * @param string $className
      * @param array $constructorArgs
      */
-    public function __construct(\PDO $pdo, string $table, string $primaryKey, string $className = '\stdClass', array $constructorArgs = [])
+    public function __construct(PDO $pdo, string $table, string $primaryKey, string $className = \stdClass::class, array $constructorArgs = [])
     {
         $this->pdo = $pdo;
         $this->table = $table;
@@ -48,11 +50,12 @@ class PdoCrud
         $this->constructorArgs = $constructorArgs;
     }
 
+
     /**
-     * @param $value
+     * @param string $value
      * @return mixed
      */
-    public function findById($value)
+    final public function findById(string $value)
     {
         $query = 'SELECT * FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :value';
         $parameters = ['value' => $value];
@@ -61,11 +64,11 @@ class PdoCrud
     }
 
     /**
-     * @param $sql
+     * @param string $sql
      * @param array $parameters
-     * @return bool|\PDOStatement
+     * @return bool|PDOStatement
      */
-    public function prepareQuery($sql, $parameters = [])
+    final public function prepareQuery(string $sql, array $parameters = [])
     {
         $query = $this->pdo->prepare($sql);
         $query->execute($parameters);
@@ -73,18 +76,18 @@ class PdoCrud
     }
 
     /**
-     * @param $sql
-     * @return \PDOStatement
+     * @param string $sql
+     * @return false|PDOStatement
      */
-    public function pdoQuery($sql)
+    final public function pdoQuery(string $sql)
     {
         return $this->pdo->query($sql);
     }
 
     /**
-     * @param $fields
+     * @param array $fields
      */
-    public function insert($fields)
+    final public function insert(array $fields): void
     {
         $query = 'INSERT INTO `' . $this->table . '` (';
 
@@ -110,14 +113,14 @@ class PdoCrud
     }
 
     /**
-     * @param $fields
-     * @return mixed
+     * @param array $fields
+     * @return array
      */
-    private function processDates($fields)
+    private function processDates(array $fields): array
     {
         foreach ($fields as $key => $value)
         {
-            if ($value instanceof \DateTime)
+            if ($value instanceof DateTime)
             {
                 $fields[$key] = $value->format('Y-m-d');
             }
@@ -126,9 +129,9 @@ class PdoCrud
     }
 
     /**
-     * @param $fields
+     * @param array $fields
      */
-    public function updateORIG($fields)
+    final public function updateORIG(array $fields): void
     {
         $id = $fields['id'];
         unset($fields['id']);
@@ -149,29 +152,29 @@ class PdoCrud
     }
 
     /**
-     * @param $fields
+     * @param array $fields
      */
-    public function update($fields)
+    final public function update(array $fields): void
     {
         // KR From https://phpdelusions.net/pdo/sql_injection_example
         $params = [];
         $setStr = '';
         foreach ($fields as $key => $value)
         {
-            if ($key != "id")
+            if ($key !== 'id')
             {
-                $setStr .= "`".str_replace("`", "``", $key)."` = :".$key.",";
+                $setStr .= '`' . str_replace('`', '``', $key) . '` = :' . $key . ',';
             }
             $params[$key] = $value;
         }
-        $setStr = rtrim($setStr, ",");
+        $setStr = rtrim($setStr, ',');
         $this->pdo->prepare("UPDATE {$this->table} SET $setStr WHERE {$this->primaryKey} = :id")->execute($params);
     }
 
     /**
-     * @param $id
+     * @param string $id
      */
-    public function delete($id)
+    final public function delete(string $id): void
     {
         $parameters = [':id' => $id];
         $this->prepareQuery('DELETE FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :id', $parameters);

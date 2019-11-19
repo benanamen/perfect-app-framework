@@ -11,28 +11,28 @@ class MessageHTML implements MessageDisplay
     /**
      * @var ActionMessages
      */
-    protected $action;
+    protected $allStatusMessages;
 
     /**
      * MessageHTML constructor.
-     * @param ActionMessages $action
+     * @param ActionMessages $allStatusMessages Array of all status's & Messages
      */
-    public function __construct(ActionMessages $action)
+    public function __construct(ActionMessages $allStatusMessages)
     {
-        $this->action = $action;
+        $this->allStatusMessages = $allStatusMessages;
     }
 
     /**
-     * @param $action
+     * @param string $action various actions
      * @return string
      */
-    public function render($action): string
+    final public function render(string $action): string
     {
-        $action = $this->action->getStatus($action);
+        $statusMessage = $this->allStatusMessages->getStatus($action);
 
         return <<<HTML
             <div class="col-md-6 offset-md-3">
-                    <div class="{$action['status']}">{$action['message']}</div>
+                    <div class="{$statusMessage['status']}">{$statusMessage['message']}</div>
             </div>
 HTML;
     }

@@ -3,7 +3,7 @@
 class DatabaseTest extends PHPUnit\Framework\TestCase
 {
 
-    public function testConnection()
+    final public function testConnection(): void
     {
         $host = 'localhost';
         $db = 'perfect_app';

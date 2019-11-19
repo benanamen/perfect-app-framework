@@ -20,5 +20,5 @@ interface VarDumper
      * @param array $data the value
      * @return mixed
      */
-    function dump(string $title, array $data);
+    public function dump(string $title, array $data): array;
 }
