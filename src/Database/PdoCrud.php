@@ -50,7 +50,6 @@ class PdoCrud
         $this->constructorArgs = $constructorArgs;
     }
 
-
     /**
      * @param string $value
      * @return mixed
