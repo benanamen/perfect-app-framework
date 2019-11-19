@@ -42,12 +42,16 @@ class Route
     {
         $pageBaseName = basename($this->page);
 
-        if (in_array($pageBaseName, $this->allowedFiles, true) && file_exists($this->includePath . $pageBaseName . '.php'))
+        if (file_exists($this->includePath . $pageBaseName . '.php'))
         {
-            return $pageBaseName . '.php';
+            if (in_array($pageBaseName, $this->allowedFiles, true))
+            {
+                return $this->includePath . $pageBaseName . '.php';
+            }
+            http_response_code(403);
+            return $this->includePath . '403-2.php';
         }
-
         http_response_code(404);
-        return '404.php';
+        return $this->includePath . '404-2.php';
     }
 }
