@@ -42,7 +42,7 @@ class Route
     {
         $pageBaseName = basename($this->page);
 
-        if (file_exists($this->includePath . $pageBaseName . '.php'))
+        if (is_readable($this->includePath . $pageBaseName . '.php'))
         {
             if (in_array($pageBaseName, $this->allowedFiles, true))
             {
