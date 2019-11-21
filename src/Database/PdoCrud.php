@@ -70,7 +70,7 @@ class PdoCrud
      * @param array $parameters
      * @return object
      */
-    private function prepareExecuteQuery(string $sql, array $parameters = []): object
+    final public function prepareExecuteQuery(string $sql, array $parameters = []): object
     {
         $query = $this->pdo->prepare($sql);
         $query->execute($parameters);
