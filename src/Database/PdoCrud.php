@@ -39,12 +39,12 @@ class PdoCrud
     /**
      * PdoCrud constructor.
      * @param PDO $pdo
-     * @param string $table
-     * @param string $primaryKey
+     * @param string|null $table
+     * @param string|null $primaryKey
      * @param string $className
      * @param array $constructorArgs
      */
-    public function __construct(PDO $pdo, string $table, string $primaryKey, string $className = stdClass::class, array $constructorArgs = [])
+    public function __construct(PDO $pdo, string $table = null, string $primaryKey = null, string $className = stdClass::class, array $constructorArgs = [])
     {
         $this->pdo = $pdo;
         $this->table = $table;
