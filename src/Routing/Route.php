@@ -52,6 +52,6 @@ class Route
             return $this->includePath . '403-2.php';
         }
         http_response_code(404);
-        return $this->includePath . '404-2.php';
+        return $this->includePath . '404-3.php';
     }
 }
