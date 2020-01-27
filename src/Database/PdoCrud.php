@@ -145,7 +145,7 @@ class PdoCrud
 
         $fields['primaryKey'] = $id;
         $fields = $this->processDates($fields);
-        $this->prepareQuery($query, $fields);
+        $this->prepareExecuteQuery($query, $fields);
     }
 
     /**
