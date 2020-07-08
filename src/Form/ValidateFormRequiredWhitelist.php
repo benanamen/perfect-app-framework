@@ -9,11 +9,11 @@ Class ValidateFormRequiredWhitelist
 {
     /**
      * @param array $whitelist
-     * @param array $trimmedPostArray
+     * @param array $postArray
      */
-    final public function validateWhiteList(array $whitelist, array $trimmedPostArray): void
+    final public function validateWhiteList(array $whitelist, array $postArray): void
     {
-        foreach ($trimmedPostArray as $key => $val)
+        foreach ($postArray as $key => $val)
         {
             if (!in_array($key, $whitelist, true))
             {
@@ -24,15 +24,15 @@ Class ValidateFormRequiredWhitelist
 
     /**
      * @param array $requiredFields
-     * @param array $trimmedPostArray
+     * @param array $postArray
      * @return array
      */
-    final public function requiredFieldCheck(array $requiredFields, array $trimmedPostArray): array
+    final public function requiredFieldCheck(array $requiredFields, array $postArray): array
     {
         $error = [];
         foreach ($requiredFields as $val)
         {
-            if (empty($trimmedPostArray[$val]))
+            if (empty($postArray[$val]))
             {
                 $msg = ucwords(str_replace('_', ' ', $val));
                 $error[$val] = $msg . ' Required';
