@@ -175,7 +175,7 @@ class PdoCrud
      * @param string $id
      * @return object
      */
-    final public function delete(string $id):object
+    final public function delete(string $id): object
     {
         $parameters = [':id' => $id];
         $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = :id";
