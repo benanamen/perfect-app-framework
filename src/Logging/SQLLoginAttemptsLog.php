@@ -17,12 +17,12 @@ use PDO;
 class SQLLoginAttemptsLog implements LoginLogger
 {
     /**
-     * @var PDO the connection to the underlying database
+     * @var PDO the connection to the underlying Database
      */
     protected $database;
 
     /**
-     * Connection to underlying database
+     * Connection to underlying Database
      * @param PDO $database
      */
     public function __construct(PDO $database)

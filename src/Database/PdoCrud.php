@@ -2,13 +2,11 @@
 
 namespace PerfectApp\Database;
 
-use DateTime;
 use PDO;
-use stdClass;
 
 /**
- * Class PdoCrud
- * @packagePerfectApp
+ * Class PdoCrud - Originally QueryBuilder
+ * @package PerfectApp\Database
  */
 class PdoCrud
 {
@@ -18,51 +16,25 @@ class PdoCrud
     private $pdo;
 
     /**
-     * @var string
-     */
-    private $table;
-
-    /**
-     * @var string
-     */
-    private $primaryKey;
-
-    /* @var string
-     */
-    private $className;
-
-    /**
-     * @var array
-     */
-    private $constructorArgs;
-
-    /**
-     * PdoCrud constructor.
+     * PdoCrudOrig constructor.
      * @param PDO $pdo
-     * @param string|null $table
-     * @param string|null $primaryKey
-     * @param string $className
-     * @param array $constructorArgs
      */
-    public function __construct(PDO $pdo, string $table = null, string $primaryKey = null, string $className = stdClass::class, array $constructorArgs = [])
+    public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
-        $this->table = $table;
-        $this->primaryKey = $primaryKey;
-        $this->className = $className;
-        $this->constructorArgs = $constructorArgs;
     }
 
     /**
-     * @param string $value
+     * @param string $table
+     * @param string $primaryKey
+     * @param $id
      * @return object
      */
-    final public function findById(string $value): object
+    final public function findById(string $table, string $primaryKey, string $id): object
     {
-        $sql = "SELECT * FROM {$this->table} WHERE {$this->primaryKey} = :value";
-        $parameters = ['value' => $value];
-        $query = $this->prepareExecuteQuery($sql, $parameters);
-        return $query->fetchObject($this->className, $this->constructorArgs);
+        $sql = "SELECT * FROM {$table} WHERE {$primaryKey} = :id";
+        $parameters = ['id' => $id];
+        return $this->prepareExecuteQuery($sql, $parameters);
     }
 
     /**
@@ -87,98 +59,58 @@ class PdoCrud
     }
 
     /**
+     * @param string $table
+     * @param array $parameters
+     * @return bool
+     */
+    final public function insert(string $table, array $parameters): bool
+    {
+        $sql = sprintf('INSERT into %s (%s) VALUES (%s)', $table, implode(', ', array_keys($parameters)), ':' . implode(', :', array_keys($parameters)));
+
+        //Alternate
+        /*$parameters = array_map(function ($parameters) {
+            return ":$parameters";
+        }, array_keys($parameters));*/
+
+        $statement = $this->pdo->prepare($sql);
+        return $statement->execute($parameters);
+    }
+
+    /**
+     * @param string $table
+     * @param string $primaryKey
      * @param array $fields
      * @return object
      */
-    final public function insert(array $fields): object
-    {
-        $query = "INSERT INTO {$this->table} (";
-        foreach ($fields as $key => $value)
-        {
-            $query .= "$key,";
-        }
-        $query = rtrim($query, ',');
-        $query .= ') VALUES (';
-        foreach ($fields as $key => $value)
-        {
-            $query .= ':' . $key . ',';
-        }
-        $query = rtrim($query, ',');
-        $query .= ')';
-        $fields = $this->processDates($fields);
-        return $this->prepareExecuteQuery($query, $fields);
-    }
-
-    /**
-     * @param array $fields
-     * @return array
-     */
-    private function processDates(array $fields): array
-    {
-        foreach ($fields as $key => $value)
-        {
-            if ($value instanceof DateTime)
-            {
-                $fields[$key] = $value->format('Y-m-d');
-            }
-        }
-        return $fields;
-    }
-
-    /**
-     * @param array $fields
-     */
-    final public function updateORIG(array $fields): void
-    {
-        $id = $fields['id'];
-        unset($fields['id']);
-
-        $query = ' UPDATE `' . $this->table . '` SET ';
-
-        foreach ($fields as $key => $value)
-        {
-            $query .= '`' . $key . '` = :' . $key . ',';
-        }
-
-        $query = rtrim($query, ',');
-        $query .= ' WHERE `' . $this->primaryKey . '` = :primaryKey';
-
-        $fields['primaryKey'] = $id;
-        $fields = $this->processDates($fields);
-        $this->prepareExecuteQuery($query, $fields);
-    }
-
-    /**
-     * From https://phpdelusions.net/pdo/sql_injection_example
-     *
-     * @param array $fields
-     * @return object
-     */
-    final public function update(array $fields): object
+    final public function update(string $table, string $primaryKey, array $fields): object
     {
         $params = [];
-        $setStr = '';
-        foreach ($fields as $key => $value)
+        $values = [];
+
+        foreach ($fields as $key => $val)
         {
             if ($key !== 'id')
             {
-                $setStr .= '`' . str_replace('`', '``', $key) . '` = :' . $key . ',';
+                $values[] = sprintf('`%s` = :%s', $key, $key);
             }
-            $params[$key] = $value;
+            $params[$key] = $val;
         }
-        $setStr = rtrim($setStr, ',');
-        $sql = "UPDATE {$this->table} SET $setStr WHERE {$this->primaryKey} = :id";
+        $sql = sprintf('UPDATE %s SET', $table);
+        $sql .= sprintf(' %s WHERE %s', implode(', ', $values), "$primaryKey =:id");
         return $this->prepareExecuteQuery($sql, $params);
     }
 
     /**
+     * @param string $table
+     * @param string $primaryKey
      * @param string $id
-     * @return object
+     * @return int
      */
-    final public function delete(string $id): object
+    final public function delete(string $table, string $primaryKey, string $id): int
     {
         $parameters = [':id' => $id];
-        $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = :id";
-        return $this->prepareExecuteQuery($sql, $parameters);
+        $sql = "DELETE FROM {$table} WHERE {$primaryKey} = :id";
+        $del = $this->prepareExecuteQuery($sql, $parameters);
+        return $del->rowCount();
     }
 }
