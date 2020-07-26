@@ -16,7 +16,7 @@ class TokenGenerator
      */
     final public function generateToken(): array
     {
-        $raw_token = openssl_random_pseudo_bytes(16);
+        $raw_token = random_bytes(16);
         $encoded_token = bin2hex($raw_token);
         $token_hash = hash('sha256', $raw_token);
         return array($encoded_token, $token_hash);
