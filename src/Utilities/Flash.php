@@ -46,7 +46,7 @@ class Flash
         {
             foreach ($flash as $message)
             {
-                echo "<div class='col-md-6 offset-md-3'><div class='{$message['type']}'>{$message['body']}</div></div>";
+                //TODO: Original format echo "<div class='col-md-6 offset-md-3'><div class='{$message['type']}'>{$message['body']}</div></div>";
                 echo "<div class='col-md-6 offset-md-3'><div class='alert alert-{$message['type']}'>{$message['body']}</div></div>";
             }
         }
