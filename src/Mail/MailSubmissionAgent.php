@@ -16,8 +16,8 @@ interface MailSubmissionAgent
      * @param string $to the receiver address
      * @param string $subject the mail subject
      * @param string $message the mail body
-     * @param string $from the sender address
+     * @param array $headers the sender address
      * @return bool
      */
-    public function send(string $to, string $subject, string $message, string $from): bool;
+    public function send(string $to, string $subject, string $message, array $headers): bool;
 }

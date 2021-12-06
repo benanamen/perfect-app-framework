@@ -6,7 +6,7 @@ use PDO;
 
 /** Test - Usage
  * require('../config.php');
- * $test = new SQLLoginAttemptsLog($pdo);
+ * $test = new SQLLoginAttemptsLog($db);
  * $test->logFailedAttempt('hacker');
  * $test->logSuccessfulAttempt('gooduser');
  */

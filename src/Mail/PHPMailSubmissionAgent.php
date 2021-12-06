@@ -12,11 +12,11 @@ class PHPMailSubmissionAgent implements MailSubmissionAgent
      * @param string $to
      * @param string $subject
      * @param string $message
-     * @param string $from
+     * @param array $headers
      * @return bool
      */
-    final public function send(string $to, string $subject, string $message, string $from): bool
+    final public function send(string $to, string $subject, string $message, array $headers): bool
     {
-        return mail($to, $subject, $message, "From: $from");
+        return mail($to, $subject, $message, $headers);
     }
 }
