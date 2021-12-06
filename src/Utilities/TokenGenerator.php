@@ -13,6 +13,7 @@ class TokenGenerator
 {
     /**
      * @return array
+     * @throws \Exception
      */
     final public function generateToken(): array
     {
