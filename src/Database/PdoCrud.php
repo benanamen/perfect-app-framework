@@ -16,7 +16,7 @@ class PdoCrud
     private $pdo;
 
     /**
-     * PdoCrudOrig constructor.
+     * PdoCrud constructor.
      * @param PDO $pdo
      */
     public function __construct(PDO $pdo)
