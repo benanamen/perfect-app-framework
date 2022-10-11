@@ -86,11 +86,11 @@ class HtmlTable
                 $ref = &$this->tfoot;
                 break;
             case 'tbody':
-                $this->tbody_ar[] = $this->tbody_ar[count($this->tbody_ar)];
+                $ref = &$this->tbody_ar[count($this->tbody_ar)];
                 break;
 
             default: // tbody
-                $this->tbody_ar[] = $this->tbody_ar[count($this->tbody_ar)];
+                $ref = &$this->tbody_ar[count($this->tbody_ar)];
         }
 
         $ref['klass'] = $klass;
