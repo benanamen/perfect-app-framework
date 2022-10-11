@@ -25,13 +25,12 @@ class PdoCrud
      * @param string $table
      * @param string $primaryKey
      * @param string $id
-     * @return object
+     * @return array
      */
-    final public function findById(string $table, string $primaryKey, string $id): object
+    final public function findById(string $table, string $primaryKey, string $id): array
     {
         $sql = "SELECT * FROM $table WHERE $primaryKey = :id";
-        $parameters = ['id' => $id];
-        return $this->prepareExecuteQuery($sql, $parameters);
+        return $this->prepareExecuteQuery($sql, [$id])->fetch();
     }
 
     /**
@@ -41,9 +40,9 @@ class PdoCrud
      */
     final public function prepareExecuteQuery(string $sql, array $parameters = []): object
     {
-        $query = $this->pdo->prepare($sql);
-        $query->execute($parameters);
-        return $query;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($parameters);
+        return $stmt;
     }
 
     /**
@@ -97,9 +96,8 @@ class PdoCrud
      */
     final public function delete(string $table, string $primaryKey, string $id): int
     {
-        $parameters = [':id' => $id];
         $sql = "DELETE FROM $table WHERE $primaryKey = :id";
-        $del = $this->prepareExecuteQuery($sql, $parameters);
+        $del = $this->prepareExecuteQuery($sql, [$id]);
         return $del->rowCount();
     }
 }
