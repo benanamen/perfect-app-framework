@@ -4,10 +4,7 @@ namespace PerfectApp\Database;
 
 use PDO;
 
-/**
- * Class PdoCrud
- * @package PerfectApp\Database
- */
+
 class PdoCrud
 {
     /**
@@ -28,12 +25,13 @@ class PdoCrud
      * @param string $table
      * @param string $primaryKey
      * @param string $id
-     * @return array
+     * @return object
      */
-    final public function findById(string $table, string $primaryKey, string $id): array
+    final public function findById(string $table, string $primaryKey, string $id): object
     {
         $sql = "SELECT * FROM $table WHERE $primaryKey = :id";
-        return $this->prepareExecuteQuery($sql, [$id])->fetch();
+        $parameters = ['id' => $id];
+        return $this->prepareExecuteQuery($sql, $parameters);
     }
 
     /**
@@ -43,9 +41,9 @@ class PdoCrud
      */
     final public function prepareExecuteQuery(string $sql, array $parameters = []): object
     {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($parameters);
-        return $stmt;
+        $query = $this->pdo->prepare($sql);
+        $query->execute($parameters);
+        return $query;
     }
 
     /**
@@ -60,15 +58,13 @@ class PdoCrud
     /**
      * @param string $table
      * @param array $parameters
-     * @return bool
+     * @return object
      */
-    final public function insert(string $table, array $parameters): bool
+    final public function insert(string $table, array $parameters): object
     {
         $keys = implode('`, `', array_keys($parameters));
         $values = implode(', :', array_keys($parameters));
-
-        $statement = $this->pdo->prepare("INSERT INTO $table (`$keys`) VALUES (:$values)");
-        return $statement->execute($parameters);
+        return $this->prepareExecuteQuery("INSERT INTO $table (`$keys`) VALUES (:$values)", $parameters);
     }
 
     /**
@@ -101,8 +97,9 @@ class PdoCrud
      */
     final public function delete(string $table, string $primaryKey, string $id): int
     {
+        $parameters = [':id' => $id];
         $sql = "DELETE FROM $table WHERE $primaryKey = :id";
-        $del = $this->prepareExecuteQuery($sql, [$id]);
+        $del = $this->prepareExecuteQuery($sql, $parameters);
         return $del->rowCount();
     }
 }
