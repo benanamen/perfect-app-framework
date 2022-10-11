@@ -64,8 +64,7 @@ class PdoCrud
     {
         $keys = implode('`, `', array_keys($parameters));
         $values = implode(', :', array_keys($parameters));
-        $sql = "INSERT INTO $table (`$keys`) VALUES (:$values)";
-        return $this->prepareExecuteQuery($sql, $parameters);
+        return $this->prepareExecuteQuery("INSERT INTO $table (`$keys`) VALUES (:$values)", $parameters);
     }
 
     /**
