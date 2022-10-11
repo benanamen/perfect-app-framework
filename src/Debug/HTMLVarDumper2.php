@@ -3,11 +3,11 @@
 namespace PerfectApp\Debug;
 
 /**
- * Class HTMLVarDumper
- * @package PerfectApp\Debug
+ *
  */
-class HTMLVarDumper implements VarDumper
+class HTMLVarDumper2 implements VarDumper
 {
+
     /**
      * @param array $data
      * @return string
@@ -16,11 +16,7 @@ class HTMLVarDumper implements VarDumper
     {
         $output = "<div class='danger'><H1>DEBUGGING IS ON !!!</H1></div>";
         foreach ($data as $k => $v) {
-            foreach ($v as $k2 => $v2) {
-                if ($k2) {
-                    $output .= "<b><span style='color:#ff0000;'>$k</span></b><pre><b>" . print_r($v, true) . "</b></pre>";
-                }
-            }
+            $output .= "<b><span style='color:#ff0000;'>$k</span></b><pre><b>" . print_r($v, true) . "</b></pre>";
         }
         return $output;
     }

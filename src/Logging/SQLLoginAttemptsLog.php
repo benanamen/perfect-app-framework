@@ -19,7 +19,7 @@ class SQLLoginAttemptsLog implements LoginLogger
     /**
      * @var PDO the connection to the underlying Database
      */
-    protected $database;
+    protected PDO $database;
 
     /**
      * Connection to underlying Database

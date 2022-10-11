@@ -11,7 +11,7 @@ class MessageJson implements MessageDisplay
     /**
      * @var ActionMessages
      */
-    protected $allStatusMessages;
+    protected ActionMessages $allStatusMessages;
 
     /**
      * MessageJson constructor.

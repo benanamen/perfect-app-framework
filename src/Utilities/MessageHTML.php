@@ -11,7 +11,7 @@ class MessageHTML implements MessageDisplay
     /**
      * @var ActionMessages
      */
-    protected $allStatusMessages;
+    protected ActionMessages $allStatusMessages;
 
     /**
      * MessageHTML constructor.

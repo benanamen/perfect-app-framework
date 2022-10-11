@@ -5,7 +5,7 @@ namespace PerfectApp\Database;
 use PDO;
 
 /**
- * Class PdoCrud - Originally QueryBuilder
+ * Class PdoCrud
  * @package PerfectApp\Database
  */
 class PdoCrud
@@ -13,7 +13,7 @@ class PdoCrud
     /**
      * @var PDO
      */
-    private $pdo;
+    private PDO $pdo;
 
     /**
      * PdoCrud constructor.
@@ -27,14 +27,13 @@ class PdoCrud
     /**
      * @param string $table
      * @param string $primaryKey
-     * @param $id
-     * @return object
+     * @param string $id
+     * @return array
      */
-    final public function findById(string $table, string $primaryKey, string $id): object
+    final public function findById(string $table, string $primaryKey, string $id): array
     {
-        $sql = "SELECT * FROM {$table} WHERE {$primaryKey} = :id";
-        $parameters = ['id' => $id];
-        return $this->prepareExecuteQuery($sql, $parameters);
+        $sql = "SELECT * FROM $table WHERE $primaryKey = :id";
+        return $this->prepareExecuteQuery($sql, [$id])->fetch();
     }
 
     /**
@@ -44,9 +43,9 @@ class PdoCrud
      */
     final public function prepareExecuteQuery(string $sql, array $parameters = []): object
     {
-        $query = $this->pdo->prepare($sql);
-        $query->execute($parameters);
-        return $query;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($parameters);
+        return $stmt;
     }
 
     /**
@@ -65,14 +64,10 @@ class PdoCrud
      */
     final public function insert(string $table, array $parameters): bool
     {
-        $sql = sprintf('INSERT into %s (%s) VALUES (%s)', $table, implode(', ', array_keys($parameters)), ':' . implode(', :', array_keys($parameters)));
+        $keys = implode('`, `', array_keys($parameters));
+        $values = implode(', :', array_keys($parameters));
 
-        //Alternate
-        /*$parameters = array_map(function ($parameters) {
-            return ":$parameters";
-        }, array_keys($parameters));*/
-
-        $statement = $this->pdo->prepare($sql);
+        $statement = $this->pdo->prepare("INSERT INTO $table (`$keys`) VALUES (:$values)");
         return $statement->execute($parameters);
     }
 
@@ -87,10 +82,8 @@ class PdoCrud
         $params = [];
         $values = [];
 
-        foreach ($fields as $key => $val)
-        {
-            if ($key !== 'id')
-            {
+        foreach ($fields as $key => $val) {
+            if ($key !== 'id') {
                 $values[] = sprintf('`%s` = :%s', $key, $key);
             }
             $params[$key] = $val;
@@ -108,9 +101,8 @@ class PdoCrud
      */
     final public function delete(string $table, string $primaryKey, string $id): int
     {
-        $parameters = [':id' => $id];
-        $sql = "DELETE FROM {$table} WHERE {$primaryKey} = :id";
-        $del = $this->prepareExecuteQuery($sql, $parameters);
+        $sql = "DELETE FROM $table WHERE $primaryKey = :id";
+        $del = $this->prepareExecuteQuery($sql, [$id]);
         return $del->rowCount();
     }
 }

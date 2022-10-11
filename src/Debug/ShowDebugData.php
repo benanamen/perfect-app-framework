@@ -9,12 +9,12 @@ namespace PerfectApp\Debug;
 class ShowDebugData
 {
     /**
-     * @param HTMLVarDumper $varDumper
-     * @param array|null $var
+     * @param VarDumper $varDumper
+     * @param array $var
      */
-    public static function displayDebugData(HTMLVarDumper $varDumper, array $var = null) :void
+
+    public static function displayDebugData(VarDumper $varDumper, array $var): void
     {
-        echo '<div class="danger"><H1>DEBUGGING IS ON !!!</H1></div>';
-        $varDumper->dump($var);
+        echo $varDumper->dump($var);
     }
 }

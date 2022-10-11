@@ -15,26 +15,26 @@ class PdoCrudOLD
     /**
      * @var PDO
      */
-    private $pdo;
+    private PDO $pdo;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $table;
+    private ?string $table;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $primaryKey;
+    private ?string $primaryKey;
 
     /* @var string
      */
-    private $className;
+    private string $className;
 
     /**
      * @var array
      */
-    private $constructorArgs;
+    private array $constructorArgs;
 
     /**
      * PdoCrud constructor.
@@ -60,7 +60,7 @@ class PdoCrudOLD
     // TODO: Why is this returning object?
     final public function findById(string $value): object
     {
-        $sql = "SELECT * FROM {$this->table} WHERE {$this->primaryKey} = :value";
+        $sql = "SELECT * FROM $this->table WHERE $this->primaryKey = :value";
         $parameters = ['value' => $value];
         $query = $this->prepareExecuteQuery($sql, $parameters);
         return $query->fetchObject($this->className, $this->constructorArgs);
@@ -93,7 +93,7 @@ class PdoCrudOLD
      */
     final public function insert(array $fields): object
     {
-        $query = "INSERT INTO {$this->table} (";
+        $query = "INSERT INTO $this->table (";
         foreach ($fields as $key => $value)
         {
             $query .= "$key,";
@@ -168,7 +168,7 @@ class PdoCrudOLD
             $params[$key] = $value;
         }
         $setStr = rtrim($setStr, ',');
-        $sql = "UPDATE {$this->table} SET $setStr WHERE {$this->primaryKey} = :id";
+        $sql = "UPDATE $this->table SET $setStr WHERE $this->primaryKey = :id";
         return $this->prepareExecuteQuery($sql, $params);
     }
 
@@ -179,7 +179,7 @@ class PdoCrudOLD
     final public function delete(string $id): object
     {
         $parameters = [':id' => $id];
-        $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = :id";
+        $sql = "DELETE FROM $this->table WHERE $this->primaryKey = :id";
         return $this->prepareExecuteQuery($sql, $parameters);
     }
 }

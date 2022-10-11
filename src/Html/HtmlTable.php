@@ -13,35 +13,35 @@ class HtmlTable
     /**
      * @var bool
      */
-    public $xhtml = true; // for col tags
+    public bool $xhtml = true; // for col tags
     /**
      * @var string
      */
-    public $tableStr;
+    public string $tableStr;
     /**
      * @var array
      */
-    private $thead = array();
+    private array $thead = array();
     /**
      * @var array
      */
-    private $tfoot = array();
+    private array $tfoot = array();
     /**
      * @var array
      */
-    private $tbody_ar = array();
+    private array $tbody_ar = array();
     /**
      * @var mixed
      */
-    private $cur_section;
+    private mixed $cur_section;
     /**
      * @var array
      */
-    private $colgroups_ar = array(); // if cols not in colgroup
+    private array $colgroups_ar = array(); // if cols not in colgroup
     /**
      * @var array
      */
-    private $cols_ar = array();
+    private array $cols_ar = array();
 
     /**
      * HtmlTable constructor.
@@ -86,11 +86,11 @@ class HtmlTable
                 $ref = &$this->tfoot;
                 break;
             case 'tbody':
-                $ref = &$this->tbody_ar[count($this->tbody_ar)];
+                $this->tbody_ar[] = $this->tbody_ar[count($this->tbody_ar)];
                 break;
 
             default: // tbody
-                $ref = &$this->tbody_ar[count($this->tbody_ar)];
+                $this->tbody_ar[] = $this->tbody_ar[count($this->tbody_ar)];
         }
 
         $ref['klass'] = $klass;

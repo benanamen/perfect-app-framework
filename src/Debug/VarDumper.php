@@ -12,13 +12,9 @@ namespace PerfectApp\Debug;
  */
 interface VarDumper
 {
-
     /**
-     *  Prints a value
-     *
-     * @param string $title the title to be printed
-     * @param array $data the value
-     * @return mixed
+     * @param array $data
+     * @return string
      */
-    public function dump(string $title, array $data): array;
+    public function dump(array $data): string;
 }

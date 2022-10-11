@@ -9,7 +9,7 @@ namespace PerfectApp\Utilities;
 interface MessageDisplay
 {
     /**
-     * @param $action
+     * @param string $action
      * @return string
      */
     public function render(string $action): string;

@@ -11,7 +11,7 @@ class ActionMessages
     /**
      * @var array
      */
-    private $actions;
+    private array $actions;
 
     /**
      * ActionMessages constructor.

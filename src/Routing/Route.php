@@ -11,16 +11,16 @@ class Route
     /**
      * @var string
      */
-    private $page;
+    private string $page;
 
     /**
      * @var string
      */
-    private $includePath;
+    private string $includePath;
     /**
      * @var array
      */
-    private $allowedFiles;
+    private array $allowedFiles;
 
     /**
      * Route constructor.
@@ -49,9 +49,9 @@ class Route
                 return $this->includePath . $pageBaseName . '.php';
             }
             http_response_code(403);
-            return $this->includePath . '403-2.php';
+            return $this->includePath . '403.php';
         }
         http_response_code(404);
-        return $this->includePath . '404-3.php';
+        return $this->includePath . '404.php';
     }
 }
