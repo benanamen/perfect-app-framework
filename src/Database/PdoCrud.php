@@ -4,7 +4,9 @@ namespace PerfectApp\Database;
 
 use PDO;
 
-
+/**
+ *
+ */
 class PdoCrud
 {
     /**
@@ -13,8 +15,7 @@ class PdoCrud
     private PDO $pdo;
 
     /**
-     * PdoCrud constructor.
-     * @param PDO $pdo
+     * @param  PDO  $pdo
      */
     public function __construct(PDO $pdo)
     {
@@ -22,20 +23,22 @@ class PdoCrud
     }
 
     /**
-     * @param string $table
-     * @param string $primaryKey
-     * @param string $id
-     * @return array
+     * @param  string  $table
+     * @param  string  $primaryKey
+     * @param  string  $id
+     *
+     * @return array|bool
      */
-    final public function findById(string $table, string $primaryKey, string $id): array
+    final public function findById(string $table, string $primaryKey, string $id): array|bool
     {
         $sql = "SELECT * FROM $table WHERE $primaryKey = :id";
         return $this->prepareExecuteQuery($sql, [$id])->fetch();
     }
 
     /**
-     * @param string $sql
-     * @param array $parameters
+     * @param  string  $sql
+     * @param  array  $parameters
+     *
      * @return object
      */
     final public function prepareExecuteQuery(string $sql, array $parameters = []): object
@@ -46,7 +49,8 @@ class PdoCrud
     }
 
     /**
-     * @param string $sql
+     * @param  string  $sql
+     *
      * @return object
      */
     final public function pdoQuery(string $sql): object
@@ -55,8 +59,9 @@ class PdoCrud
     }
 
     /**
-     * @param string $table
-     * @param array $parameters
+     * @param  string  $table
+     * @param  array  $parameters
+     *
      * @return object
      */
     final public function insert(string $table, array $parameters): object
@@ -67,9 +72,10 @@ class PdoCrud
     }
 
     /**
-     * @param string $table
-     * @param string $primaryKey
-     * @param array $fields
+     * @param  string  $table
+     * @param  string  $primaryKey
+     * @param  array  $fields
+     *
      * @return object
      */
     final public function update(string $table, string $primaryKey, array $fields): object
@@ -89,9 +95,10 @@ class PdoCrud
     }
 
     /**
-     * @param string $table
-     * @param string $primaryKey
-     * @param string $id
+     * @param  string  $table
+     * @param  string  $primaryKey
+     * @param  string  $id
+     *
      * @return int
      */
     final public function delete(string $table, string $primaryKey, string $id): int
