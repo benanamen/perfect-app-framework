@@ -66,6 +66,7 @@ class PdoCrud
      */
     final public function insert(string $table, array $parameters): object
     {
+        unset($parameters['id']);
         $keys = implode('`, `', array_keys($parameters));
         $values = implode(', :', array_keys($parameters));
         return $this->prepareExecuteQuery("INSERT INTO $table (`$keys`) VALUES (:$values)", $parameters);
