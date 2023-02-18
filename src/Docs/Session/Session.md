@@ -32,8 +32,8 @@ This method allows you to set a value in the session using a key.
 
 **Parameter**s
 
-- `$key` - The key of the session value to set.
-- `$value` -The value to set in the session.
+-   `$key` - The key of the session value to set.
+-   `$value` -The value to set in the session.
 
 **Return value**
 
