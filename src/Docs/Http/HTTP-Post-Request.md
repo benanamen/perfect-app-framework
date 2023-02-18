@@ -1,6 +1,6 @@
 # Class: PostRequest
 
-## Represents a HTTP POST request.
+## Represents a HTTP POST request
 
 ### Usage
 

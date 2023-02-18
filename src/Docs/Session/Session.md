@@ -4,24 +4,24 @@ The `Session` class is a simple PHP class that provides an easy-to-use interface
 
 This method allows you to retrieve a value from the session using a key. If the key does not exist in the session, `null` will be returned.
 
-### Parameters
+**Parameters**
 
-* `$key` - The key of the session value to retrieve.
+  * `$key` - The key of the session value to retrieve.
 
-### Return value
+**Return value**
 
-* Returns the session value associated with the given key or `null` if the key does not exist.
+  * Returns the session value associated with the given key or `null` if the key does not exist.
 
 `set($key, $value)`
 
 This method allows you to set a value in the session using a key.
 
-### Parameters
+**Parameters**
 
-* `$key` - The key of the session value to set.
-* `$value` - The value to set in the session.
+  * `$key` - The key of the session value to set.
+  * `$value` - The value to set in the session.
 
-### Return value
+**Return value**
 
 This method does not return any value.
 
@@ -30,9 +30,9 @@ This method does not return any value.
 This method allows you to delete a value from the session using a key.
 Parameters
 
-* `$key` - The key of the session value to delete.
+  * `$key` - The key of the session value to delete.
 
-### Return value
+**Return value**
 
 This method does not return any value.
 
@@ -40,13 +40,13 @@ This method does not return any value.
 
 This method starts a session if it has not been started already.
 
-### Parameters
+**Parameters**
 
-* This method does not take any parameters.
+  * This method does not take any parameters.
 
-### Return value
+**Return value**
 
-* This method does not return any value.
+  * This method does not return any value.
 
 ### Example Usage
 
