@@ -6,4 +6,6 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/benanamen/perfect-app-framework/badge)](https://www.codefactor.io/repository/github/benanamen/perfect-app-framework)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=benanamen_perfect-app-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=benanamen_perfect-app-framework)
 
+[![codebeat badge](https://codebeat.co/badges/c36874dd-867c-4afb-b081-b9219d4bb24a)](https://codebeat.co/projects/github-com-benanamen-perfect-app-framework-master)
+
 A Proprietary Non-Opinionated Framework Implementing Best Practices
