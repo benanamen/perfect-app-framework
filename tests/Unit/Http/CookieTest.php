@@ -3,6 +3,7 @@
 namespace Unit\Http;
 
 use Codeception\Test\Unit;
+use DateTime;
 use PerfectApp\Http\Cookie;
 
 class CookieTest extends Unit
@@ -15,7 +16,7 @@ class CookieTest extends Unit
     public function testSetAndGet()
     {
         // Arrange
-        $cookie = new Cookie();
+        $cookie = new Cookie([]);
         $key = 'test_key';
         $value = 'test_value';
 
@@ -33,7 +34,7 @@ class CookieTest extends Unit
     public function testDelete()
     {
         // Arrange
-        $cookie = new Cookie();
+        $cookie = new Cookie([]);
         $key = 'test_key';
         $value = 'test_value';
 

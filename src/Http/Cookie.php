@@ -4,9 +4,16 @@ namespace PerfectApp\Http;
 
 class Cookie
 {
-    public function get(string $key)
+    private array $cookie;
+
+    public function __construct(array $cookie)
     {
-        return $_COOKIE[$key] ?? null;
+        $this->cookie = $cookie;
+    }
+
+    public function get(string $key): ?string
+    {
+        return $this->cookie[$key] ?? null;
     }
 
     public function set(
@@ -19,7 +26,7 @@ class Cookie
         bool $httponly = false
     ): void {
         setcookie($key, $value, $expire, $path, $domain, $secure, $httponly);
-        $_COOKIE[$key] = $value;
+        $this->cookie[$key] = $value;
     }
 
     public function delete(
@@ -28,6 +35,6 @@ class Cookie
         string $domain = ''
     ): void {
         setcookie($key, null, time() - 3600, $path, $domain);
-        unset($_COOKIE[$key]);
+        unset($this->cookie[$key]);
     }
 }
