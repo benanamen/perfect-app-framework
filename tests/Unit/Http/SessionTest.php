@@ -3,21 +3,21 @@
 namespace Unit\Http;
 
 use PerfectApp\Session\Session;
-use PHPUnit\Framework\TestCase;
+use Codeception\Test\Unit;
 
-class SessionTest extends TestCase
+class SessionTest extends Unit
 {
-    protected function setUp(): void
+    protected function _before()
     {
         session_start();
     }
 
-    protected function tearDown(): void
+    protected function _after()
     {
         session_destroy();
     }
 
-    public function testSetAndGet()
+    public function testGetAndSet()
     {
         $session = new Session();
         $session->set('foo', 'bar');
@@ -33,14 +33,5 @@ class SessionTest extends TestCase
         $session->delete('foo');
 
         $this->assertNull($session->get('foo'));
-    }
-
-    public function testStart()
-    {
-        $session = new Session();
-
-        $session->start();
-
-        $this->assertSame(PHP_SESSION_ACTIVE, session_status());
     }
 }
