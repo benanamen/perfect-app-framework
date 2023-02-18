@@ -7,28 +7,28 @@ use PerfectApp\Http\Request;
 
 class RequestTest extends Unit
 {
-    protected function _before()
+/*    protected function _before()
     {
         $_REQUEST = [];
-    }
+    }*/
 
     public function testGet()
     {
-        $_REQUEST['foo'] = 'bar';
-
-        $request = new Request();
+        $requestData = ['foo' => 'bar', 'baz' => 'qux'];
+        $request = new Request($requestData);
 
         $this->assertEquals('bar', $request->get('foo'));
-        $this->assertNull($request->get('baz'));
+        $this->assertEquals('qux', $request->get('baz'));
+        $this->assertNull($request->get('not_set'));
     }
 
     public function testHas()
     {
-        $_REQUEST['foo'] = 'bar';
-
-        $request = new Request();
+        $requestData = ['foo' => 'bar', 'baz' => 'qux'];
+        $request = new Request($requestData);
 
         $this->assertTrue($request->has('foo'));
-        $this->assertFalse($request->has('baz'));
+        $this->assertTrue($request->has('baz'));
+        $this->assertFalse($request->has('not_set'));
     }
 }
