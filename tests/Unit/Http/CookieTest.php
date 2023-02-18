@@ -7,37 +7,42 @@ use PerfectApp\Http\Cookie;
 
 class CookieTest extends Unit
 {
-    protected function _before()
-    {
-        $_COOKIE = [];
-    }
+    protected $tester;
 
-    public function testGet()
+    /**
+     * Test setting and getting a cookie
+     */
+    public function testSetAndGet()
     {
-        $_COOKIE['foo'] = 'bar';
-
+        // Arrange
         $cookie = new Cookie();
+        $key = 'test_key';
+        $value = 'test_value';
 
-        $this->assertEquals('bar', $cookie->get('foo'));
-        $this->assertNull($cookie->get('baz'));
+        // Act
+        $cookie->set($key, $value);
+        $result = $cookie->get($key);
+
+        // Assert
+        $this->assertEquals($value, $result);
     }
 
-    public function testSet()
-    {
-        $cookie = new Cookie();
-
-        $cookie->set('foo', 'bar', time() + 3600, '/', '', true, true);
-
-        $this->assertEquals('bar', $_COOKIE['foo']);
-    }
-
+    /**
+     * Test deleting a cookie
+     */
     public function testDelete()
     {
+        // Arrange
         $cookie = new Cookie();
-        $cookie->set('foo', 'bar');
+        $key = 'test_key';
+        $value = 'test_value';
 
-        $cookie->delete('foo');
+        // Act
+        $cookie->set($key, $value);
+        $cookie->delete($key);
+        $result = $cookie->get($key);
 
-        $this->assertNull($cookie->get('foo'));
+        // Assert
+        $this->assertNull($result);
     }
 }

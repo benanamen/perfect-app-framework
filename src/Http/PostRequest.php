@@ -4,13 +4,20 @@ namespace PerfectApp\Http;
 
 class PostRequest
 {
+    private $postData;
+
+    public function __construct(array $postData)
+    {
+        $this->postData = $postData;
+    }
+
     public function get(string $key)
     {
-        return $_POST[$key] ?? null;
+        return $this->postData[$key] ?? null;
     }
 
     public function has(string $key): bool
     {
-        return isset($_POST[$key]);
+        return isset($this->postData[$key]);
     }
 }

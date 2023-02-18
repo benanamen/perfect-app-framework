@@ -7,23 +7,37 @@ use PerfectApp\Http\PostRequest;
 
 class PostRequestTest extends Unit
 {
-    public function testGet(): void
+    public function testGet()
     {
-        $_POST['foo'] = 'bar';
+        // Define test data for the POST request
+        $postData = [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+        ];
 
-        $request = new PostRequest();
+        // Instantiate the PostRequest class with the test data
+        $postRequest = new PostRequest($postData);
 
-        $this->assertEquals('bar', $request->get('foo'));
-        $this->assertNull($request->get('baz'));
+        // Test that we can get the value of a POST parameter
+        $this->assertEquals('John Doe', $postRequest->get('name'));
+        $this->assertEquals('johndoe@example.com', $postRequest->get('email'));
+        $this->assertNull($postRequest->get('invalid_key'));
     }
 
     public function testHas()
     {
-        $_POST['foo'] = 'bar';
+        // Define test data for the POST request
+        $postData = [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+        ];
 
-        $request = new PostRequest();
+        // Instantiate the PostRequest class with the test data
+        $postRequest = new PostRequest($postData);
 
-        $this->assertTrue($request->has('foo'));
-        $this->assertFalse($request->has('baz'));
+        // Test that we can check if a POST parameter exists
+        $this->assertTrue($postRequest->has('name'));
+        $this->assertTrue($postRequest->has('email'));
+        $this->assertFalse($postRequest->has('invalid_key'));
     }
 }

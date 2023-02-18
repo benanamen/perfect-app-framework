@@ -4,13 +4,20 @@ namespace PerfectApp\Http;
 
 class GetRequest
 {
+    private $getData;
+
+    public function __construct(array $getData)
+    {
+        $this->getData = $getData;
+    }
+
     public function get(string $key)
     {
-        return $_GET[$key] ?? null;
+        return $this->getData[$key] ?? null;
     }
 
     public function has(string $key): bool
     {
-        return isset($_GET[$key]);
+        return isset($this->getData[$key]);
     }
 }

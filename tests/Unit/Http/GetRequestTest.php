@@ -7,31 +7,33 @@ use PerfectApp\Http\GetRequest;
 
 class GetRequestTest extends Unit
 {
-    public function testGet()
+    private $getRequest;
+
+    protected function _before()
     {
-        $_GET = [
-            'foo' => 'bar',
-            'baz' => 'qux',
-        ];
-
-        $getRequest = new GetRequest();
-
-        $this->assertEquals('bar', $getRequest->get('foo'));
-        $this->assertEquals('qux', $getRequest->get('baz'));
-        $this->assertNull($getRequest->get('non-existent-key'));
+        $this->getRequest = new GetRequest([
+            'param1' => 'value1',
+            'param2' => 'value2',
+        ]);
     }
 
-    public function testHas()
+    public function testGetExistingParam()
     {
-        $_GET = [
-            'foo' => 'bar',
-            'baz' => 'qux',
-        ];
+        $this->assertEquals('value1', $this->getRequest->get('param1'));
+    }
 
-        $getRequest = new GetRequest();
+    public function testGetNonexistentParam()
+    {
+        $this->assertNull($this->getRequest->get('nonexistent'));
+    }
 
-        $this->assertTrue($getRequest->has('foo'));
-        $this->assertTrue($getRequest->has('baz'));
-        $this->assertFalse($getRequest->has('non-existent-key'));
+    public function testHasExistingParam()
+    {
+        $this->assertTrue($this->getRequest->has('param2'));
+    }
+
+    public function testHasNonexistentParam()
+    {
+        $this->assertFalse($this->getRequest->has('nonexistent'));
     }
 }
