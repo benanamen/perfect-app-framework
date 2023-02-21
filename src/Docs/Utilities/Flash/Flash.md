@@ -28,7 +28,6 @@ This will display the messages as styled `div` elements with the appropriate CSS
 
 You can also retrieve the messages manually using the `getMessages()` method:
 
-
 ```php
 use PerfectApp\Utilities\Flash;
 

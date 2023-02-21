@@ -5,7 +5,7 @@ namespace PerfectApp\Form;
 /**
  * Class ValidateFormRequiredWhitelist
  */
-Class ValidateFormRequiredWhitelist
+class ValidateFormRequiredWhitelist
 {
     /**
      * @param array $whitelist
