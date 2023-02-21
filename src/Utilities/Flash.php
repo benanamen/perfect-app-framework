@@ -51,7 +51,7 @@ class Flash
      * @return array An array with all the messages or null if none set
      */
 
-    private function getMessages(): array
+    public function getMessages(): array
     {
         $messages = [];
 
