@@ -2,14 +2,18 @@
 
 namespace PerfectApp\Form;
 
+use Exception;
+
 /**
  * Class ValidateFormRequiredWhitelist
  */
 class ValidateFormRequiredWhitelist
 {
     /**
-     * @param array $whitelist
-     * @param array $postArray
+     * @param  array  $whitelist
+     * @param  array  $postArray
+     *
+     * @throws Exception
      */
     final public function validateWhiteList(array $whitelist, array $postArray): void
     {
@@ -17,7 +21,9 @@ class ValidateFormRequiredWhitelist
         {
             if (!in_array($key, $whitelist, true))
             {
-                die('Hack-Attempt Detected. Please use only the fields in the form');
+                $message = 'Hack-Attempt Detected. Please use only the fields in the form.';
+                echo "<h1>$message</h1>";
+                throw new \Exception($message);
             }
         }
     }
