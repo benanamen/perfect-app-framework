@@ -1,13 +1,25 @@
 {
-  "require": {
-    "ext-pdo": "*",
-    "codeception/codeception": "^5.0",
-    "codeception/module-phpbrowser": "*",
-    "codeception/module-asserts": "*"
-  },
+  "name": "krubio/router-request",
   "autoload": {
     "psr-4": {
       "PerfectApp\\": "src/"
+    }
+  },
+  "require": {
+    "ext-pdo": "*",
+    "ext-ctype": "*"
+  },
+  "require-dev": {
+    "php": "^8.1",
+    "codeception/codeception": "^5.0",
+    "codeception/module-asserts": "*",
+    "codeception/module-phpbrowser": "*",
+    "codeception/c3": "2.*",
+    "ext-xdebug": "*"
+  },
+  "config": {
+    "allow-plugins": {
+      "codeception/c3": true
     }
   }
 }

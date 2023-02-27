@@ -9,29 +9,48 @@ class SessionTest extends Unit
 {
     protected function _before()
     {
-        session_start();
+        // Start code coverage
+        xdebug_start_code_coverage();
+
+        // Start a new session for each test
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Clear the session data before each test
+        $_SESSION = [];
     }
 
-    protected function _after()
+    public function testConstructorStartsSession()
     {
-        session_destroy();
+        new Session();
+        $this->assertNotEmpty(session_id());
     }
 
-    public function testGetAndSet()
+    public function testSetAndGet()
     {
         $session = new Session();
-        $session->set('foo', 'bar');
-
-        $this->assertEquals('bar', $session->get('foo'));
+        $session->set('name', 'John');
+        $this->assertEquals('John', $session->get('name'));
     }
 
     public function testDelete()
     {
         $session = new Session();
-        $session->set('foo', 'bar');
+        $session->set('name', 'John');
+        $session->delete('name');
+        $this->assertNull($session->get('name'));
+    }
 
-        $session->delete('foo');
+    public function testConstructorWithSessionData()
+    {
+        $_SESSION['name'] = 'John';
+        $session = new Session();
+        $this->assertEquals('John', $session->get('name'));
+    }
 
-        $this->assertNull($session->get('foo'));
+    public function testConstructorWithoutSessionData()
+    {
+        $session = new Session();
+        $this->assertEmpty($session->get('name'));
     }
 }

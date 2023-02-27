@@ -4,8 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc36471d91fc2dbf710ea26c0d7ee257",
-    "packages": [
+    "content-hash": "a80d94cd3974799d5b49470a96fa4723",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "behat/gherkin",
             "version": "v4.9.0",
@@ -68,6 +69,63 @@
                 "source": "https://github.com/Behat/Gherkin/tree/v4.9.0"
             },
             "time": "2021-10-12T13:05:09+00:00"
+        },
+        {
+            "name": "codeception/c3",
+            "version": "2.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/c3.git",
+                "reference": "0b16f22ec0c46bc131063a3f704bdf9761192d6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/c3/zipball/0b16f22ec0c46bc131063a3f704bdf9761192d6e",
+                "reference": "0b16f22ec0c46bc131063a3f704bdf9761192d6e",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0 || ^2.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Codeception\\c3\\Installer"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codeception\\c3\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tiger Seo",
+                    "email": "tiger.seo@gmail.com"
+                },
+                {
+                    "name": "Michael Bodnarchuk",
+                    "email": "davert.php@codegyre.com",
+                    "homepage": "http://codegyre.com"
+                }
+            ],
+            "description": "CodeCoverage collector for Codeception",
+            "homepage": "http://codeception.com/",
+            "keywords": [
+                "code coverage",
+                "codecoverage"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeception/c3/issues",
+                "source": "https://github.com/Codeception/c3/tree/2.8.1"
+            },
+            "time": "2023-02-10T18:07:43+00:00"
         },
         {
             "name": "codeception/codeception",
@@ -1460,16 +1518,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.0.8",
+            "version": "10.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "be72e6e446f40e930b6350922d302690bb35888e"
+                "reference": "d18a18b07e7a9ad52d994b1785f9e301fc84b616"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be72e6e446f40e930b6350922d302690bb35888e",
-                "reference": "be72e6e446f40e930b6350922d302690bb35888e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d18a18b07e7a9ad52d994b1785f9e301fc84b616",
+                "reference": "d18a18b07e7a9ad52d994b1785f9e301fc84b616",
                 "shasum": ""
             },
             "require": {
@@ -1540,7 +1598,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.8"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.11"
             },
             "funding": [
                 {
@@ -1556,7 +1614,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-18T16:32:22+00:00"
+            "time": "2023-02-20T16:39:36+00:00"
         },
         {
             "name": "psr/container",
@@ -4158,15 +4216,17 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-ctype": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {
+        "php": "^8.1"
+    },
     "plugin-api-version": "2.3.0"
 }
