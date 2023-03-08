@@ -13,5 +13,4 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=benanamen_perfect-app-framework&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=benanamen_perfect-app-framework)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=benanamen_perfect-app-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=benanamen_perfect-app-framework)
 
-
 A Proprietary Non-Opinionated Framework Implementing Best Practices
