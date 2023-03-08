@@ -7,6 +7,8 @@ use PerfectApp\Utilities\Flash;
 
 class FlashTest extends Unit
 {
+    const TEST_MESSAGE = 'Test message';
+
     protected function _before()
     {
         // start session for testing
@@ -23,23 +25,23 @@ class FlashTest extends Unit
     public function testAddMessage()
     {
         // add a message and check session variable
-        Flash::addMessage('Test message');
-        $this->assertEquals([['body' => 'Test message', 'type' => 'success']], $_SESSION['flash_notifications']);
+        Flash::addMessage(self::TEST_MESSAGE);
+        $this->assertEquals([['body' => self::TEST_MESSAGE, 'type' => 'success']], $_SESSION['flash_notifications']);
     }
 
     public function testAddMessageWithType()
     {
         // add a message with type and check session variable
-        Flash::addMessage('Test message', 'warning');
-        $this->assertEquals([['body' => 'Test message', 'type' => 'warning']], $_SESSION['flash_notifications']);
+        Flash::addMessage(self::TEST_MESSAGE, 'warning');
+        $this->assertEquals([['body' => self::TEST_MESSAGE, 'type' => 'warning']], $_SESSION['flash_notifications']);
     }
 
     public function testGetMessages()
     {
         // set session variable and check returned value
-        $_SESSION['flash_notifications'] = [['body' => 'Test message', 'type' => 'info']];
+        $_SESSION['flash_notifications'] = [['body' => self::TEST_MESSAGE, 'type' => 'info']];
         $messages = (new Flash())->getMessages();
-        $this->assertEquals([['body' => 'Test message', 'type' => 'info']], $messages);
+        $this->assertEquals([['body' => self::TEST_MESSAGE, 'type' => 'info']], $messages);
     }
 
     public function testGetMessagesEmpty()
@@ -52,7 +54,7 @@ class FlashTest extends Unit
     public function testDisplayMessages()
     {
         // set session variable and check HTML output
-        $_SESSION['flash_notifications'] = [['body' => 'Test message', 'type' => 'success']];
+        $_SESSION['flash_notifications'] = [['body' => self::TEST_MESSAGE, 'type' => 'success']];
         ob_start();
         Flash::displayMessages();
         $output = ob_get_clean();

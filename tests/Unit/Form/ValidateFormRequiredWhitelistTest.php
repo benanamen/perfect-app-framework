@@ -8,6 +8,9 @@ use PerfectApp\Form\ValidateFormRequiredWhitelist;
 
 class ValidateFormRequiredWhitelistTest extends Unit
 {
+    const PHONENUMBER = '555-1234';
+    const EMAIL = 'john@example.com';
+    const NAME = 'John';
     private array $whitelist = ['name', 'email', 'phone'];
     private array $requiredFields = ['name', 'email', 'phone'];
 
@@ -17,7 +20,7 @@ class ValidateFormRequiredWhitelistTest extends Unit
     public function testValidateWhiteList(): void
     {
         $validator = new ValidateFormRequiredWhitelist();
-        $postData = ['name' => 'John', 'email' => 'john@example.com', 'phone' => '555-1234'];
+        $postData = ['name' => self::NAME, 'email' => self::EMAIL, 'phone' => self::PHONENUMBER ];
         $validator->validateWhiteList($this->whitelist, $postData);
         $this->assertTrue(true); // No exception thrown, whitelist is valid
     }
@@ -25,7 +28,7 @@ class ValidateFormRequiredWhitelistTest extends Unit
     public function testValidateWhiteListInvalid(): void
     {
         $validator = new ValidateFormRequiredWhitelist();
-        $postData = ['name' => 'John', 'email' => 'john@example.com', 'invalidField' => 'HackData'];
+        $postData = ['name' => self::NAME, 'email' => self::EMAIL, 'invalidField' => 'HackData'];
         $this->expectException(Exception::class);
         $validator->validateWhiteList(['name', 'email', 'phone', 'password'], $postData);
     }
@@ -33,7 +36,7 @@ class ValidateFormRequiredWhitelistTest extends Unit
     public function testRequiredFieldCheck(): void
     {
         $validator = new ValidateFormRequiredWhitelist();
-        $postData = ['name' => 'John', 'email' => 'john@example.com', 'phone' => '555-1234'];
+        $postData = ['name' => self::NAME, 'email' => self::EMAIL, 'phone' => self::PHONENUMBER];
         $errors = $validator->requiredFieldCheck($this->requiredFields, $postData);
         $this->assertEmpty($errors); // No errors, required fields are present
     }
@@ -41,10 +44,10 @@ class ValidateFormRequiredWhitelistTest extends Unit
     public function testRequiredFieldCheckMissingField(): void
     {
         $validator = new ValidateFormRequiredWhitelist();
-        $postData = ['name' => 'John', 'phone' => '555-1234'];
+        $postData = ['name' => self::NAME, 'phone' => self::PHONENUMBER];
         $errors = $validator->requiredFieldCheck($this->requiredFields, $postData);
         $this->assertCount(1, $errors); // One error, one required field is missing
         $this->assertArrayHasKey('email', $errors); // Error is for missing email field
-        $this->assertEquals('Email Required', $errors['email']); // Error message is correct
+        $this->assertEquals('EMAIL Required', $errors['email']); // Error message is correct
     }
 }

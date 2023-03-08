@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 //From https://dev.to/fadymr/php-create-your-own-php-dotenv-3k2i
+// A different simple implementation https://dev.to/walternascimentobarroso/dotenv-in-php-45mn
 
 namespace PerfectApp\Config;
 
@@ -27,7 +28,7 @@ class DotEnv
      */
     public function __construct(string $path)
     {
-        if(!file_exists($path)) {
+        if (!file_exists($path)) {
             throw new InvalidArgumentException(sprintf('%s does not exist', $path));
         }
         $this->path = $path;

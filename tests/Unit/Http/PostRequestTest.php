@@ -7,20 +7,23 @@ use PerfectApp\Http\PostRequest;
 
 class PostRequestTest extends Unit
 {
+    const JOHN_DOE = 'John Doe';
+    const JOHNDOE_EXAMPLE_COM = 'johndoe@example.com';
+
     public function testGet()
     {
         // Define test data for the POST request
         $postData = [
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
+            'name' => self::JOHN_DOE,
+            'email' => self::JOHNDOE_EXAMPLE_COM,
         ];
 
         // Instantiate the PostRequest class with the test data
         $postRequest = new PostRequest($postData);
 
         // Test that we can get the value of a POST parameter
-        $this->assertEquals('John Doe', $postRequest->get('name'));
-        $this->assertEquals('johndoe@example.com', $postRequest->get('email'));
+        $this->assertEquals(self::JOHN_DOE, $postRequest->get('name'));
+        $this->assertEquals(self::JOHNDOE_EXAMPLE_COM, $postRequest->get('email'));
         $this->assertNull($postRequest->get('invalid_key'));
     }
 
@@ -28,8 +31,8 @@ class PostRequestTest extends Unit
     {
         // Define test data for the POST request
         $postData = [
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
+            'name' => self::JOHN_DOE,
+            'email' => self::JOHNDOE_EXAMPLE_COM,
         ];
 
         // Instantiate the PostRequest class with the test data
