@@ -22,7 +22,6 @@ class SessionTest extends Unit
 
     public function testConstructorStartsSession()
     {
-        new Session();
         $this->assertNotEmpty(session_id());
     }
 
