@@ -23,7 +23,7 @@ class ValidateFormRequiredWhitelist
             {
                 $message = 'Hack-Attempt Detected. Please use only the fields in the form.';
                 echo "<h1>$message</h1>";
-                throw new \Exception($message);
+                throw new Exception($message);
             }
         }
     }

@@ -4,7 +4,7 @@ namespace PerfectApp\Http;
 
 class PostRequest
 {
-    private $postData;
+    private array $postData;
 
     public function __construct(array $postData)
     {

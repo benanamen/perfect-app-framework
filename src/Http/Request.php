@@ -4,7 +4,7 @@ namespace PerfectApp\Http;
 
 class Request
 {
-    private $requestData;
+    private array $requestData;
 
     public function __construct(array $requestData)
     {
