@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace PerfectApp\Debug;
 
@@ -7,7 +9,6 @@ namespace PerfectApp\Debug;
  */
 class HTMLVarDumper2 implements VarDumper
 {
-
     /**
      * @param array $data
      * @return string

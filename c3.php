@@ -8,7 +8,7 @@
  * @author tiger
  */
 
- $_SERVER['HTTP_X_CODECEPTION_CODECOVERAGE_DEBUG'] = 1;
+// $_SERVER['HTTP_X_CODECEPTION_CODECOVERAGE_DEBUG'] = 1;
 
 use SebastianBergmann\CodeCoverage\CodeCoverage;
 use SebastianBergmann\CodeCoverage\Driver\Driver;
@@ -33,9 +33,9 @@ if (isset($_COOKIE['CODECEPTION_CODECOVERAGE'])) {
     }
 }
 
-/*if (!array_key_exists('HTTP_X_CODECEPTION_CODECOVERAGE', $_SERVER)) {
+if (!array_key_exists('HTTP_X_CODECEPTION_CODECOVERAGE', $_SERVER)) {
     return;
-}*/
+}
 
 if (!function_exists('__c3_error')) {
     function __c3_error($message)

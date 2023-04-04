@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 // See Example: https://github.com/garygreen/pretty-routes
 
 namespace PerfectApp\Debug;

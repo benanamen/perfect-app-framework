@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace PerfectApp\Html;
 
@@ -63,8 +65,7 @@ class HtmlTable
     private function addAttribs(array $attr_ar): string
     {
         $str = '';
-        foreach ($attr_ar as $key => $val)
-        {
+        foreach ($attr_ar as $key => $val) {
             $str .= " $key=\"$val\"";
         }
         return $str;
@@ -77,8 +78,7 @@ class HtmlTable
      */
     final public function addTSection(string $sec, string $klass = '', array $attr_ar = []): void
     {
-        switch ($sec)
-        {
+        switch ($sec) {
             case 'thead':
                 $ref = &$this->thead;
                 break;
@@ -121,13 +121,10 @@ class HtmlTable
         $col = array('span' => $span, 'klass' => $klass, 'atts' => $attr_ar);
 
         // in colgroup?
-        if (!empty($this->colgroups_ar))
-        {
+        if (!empty($this->colgroups_ar)) {
             $group = &$this->colgroups_ar[count($this->colgroups_ar) - 1];
             $group['cols'][] = &$col;
-        }
-        else
-        {
+        } else {
             $this->cols_ar[] = &$col;
         }
     }
@@ -162,14 +159,10 @@ class HtmlTable
     {
         $cell = array('data' => $data, 'klass' => $klass, 'type' => $type, 'atts' => $attr_ar);
 
-        if (empty($this->cur_section['rows']))
-        {
-            try
-            {
+        if (empty($this->cur_section['rows'])) {
+            try {
                 throw new InvalidArgumentException('You need to addRow before you can addCell');
-            }
-            catch (Exception $ex)
-            {
+            } catch (Exception $ex) {
                 $msg = $ex->getMessage();
                 echo "<p>Error: $msg</p>";
             }
@@ -193,8 +186,7 @@ class HtmlTable
         $this->tableStr .= !empty($this->thead) ? $this->getSection($this->thead, 'thead') : '';
         $this->tableStr .= !empty($this->tfoot) ? $this->getSection($this->tfoot, 'tfoot') : '';
 
-        foreach ($this->tbody_ar as $sec)
-        {
+        foreach ($this->tbody_ar as $sec) {
             $this->tableStr .= !empty($sec) ? $this->getSection($sec, 'tbody') : '';
         }
 
@@ -209,15 +201,11 @@ class HtmlTable
     {
         $str = '';
 
-        if (!empty($this->colgroups_ar))
-        {
-            foreach ($this->colgroups_ar as $group)
-            {
+        if (!empty($this->colgroups_ar)) {
+            foreach ($this->colgroups_ar as $group) {
                 $str .= '<colgroup' . (!empty($group['span']) ? ' span="{$group["span"]}"' : '') . (!empty($group['klass']) ? ' class="{$group["klass"]}"' : '') . $this->addAttribs($group['atts']) . '>' . $this->getCols($group['cols']) . "</colgroup>\n";
             }
-        }
-        else
-        {
+        } else {
             $str .= $this->getCols($this->cols_ar);
         }
         return $str;
@@ -230,8 +218,7 @@ class HtmlTable
     private function getCols(array $ar): string
     {
         $str = '';
-        foreach ($ar as $col)
-        {
+        foreach ($ar as $col) {
             $str .= '<col' . (!empty($col['span']) ? ' span="{$col["span"]}"' : '') . (!empty($col['klass']) ? ' class="{$col["klass"]}"' : '') . $this->addAttribs($col['atts']) . ($this->xhtml ? ' />' : '>');
         }
         return $str;
@@ -248,8 +235,7 @@ class HtmlTable
         $atts = !empty($sec['atts']) ? $this->addAttribs($sec['atts']) : '';
         $str = "<$tag" . $klass . $atts . ">\n";
 
-        foreach ($sec['rows'] as $row)
-        {
+        foreach ($sec['rows'] as $row) {
             $str .= (!empty($row['klass']) ? '  <tr class="{$row["klass"]}"' : '  <tr') . $this->addAttribs($row['atts']) . ">\n" . $this->getRowCells($row['cells']) . "  </tr>\n";
         }
 
@@ -264,8 +250,7 @@ class HtmlTable
     private function getRowCells(array $cells): string
     {
         $str = '';
-        foreach ($cells as $cell)
-        {
+        foreach ($cells as $cell) {
             $tag = ($cell['type'] === 'data') ? 'td' : 'th';
             $str .= (!empty($cell['klass']) ? '    <$tag class="{$cell["klass"]}"' : "    <$tag") . $this->addAttribs($cell['atts']) . '>' . $cell['data'] . "</$tag>\n";
         }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace PerfectApp\Form;
 
@@ -17,10 +19,8 @@ class ValidateFormRequiredWhitelist
      */
     final public function validateWhiteList(array $whitelist, array $postArray): void
     {
-        foreach ($postArray as $key => $val)
-        {
-            if (!in_array($key, $whitelist, true))
-            {
+        foreach ($postArray as $key => $val) {
+            if (!in_array($key, $whitelist, true)) {
                 $message = 'Hack-Attempt Detected. Please use only the fields in the form.';
                 echo "<h1>$message</h1>";
                 throw new Exception($message);
@@ -36,10 +36,8 @@ class ValidateFormRequiredWhitelist
     final public function requiredFieldCheck(array $requiredFields, array $postArray): array
     {
         $error = [];
-        foreach ($requiredFields as $val)
-        {
-            if (empty($postArray[$val]))
-            {
+        foreach ($requiredFields as $val) {
+            if (empty($postArray[$val])) {
                 $msg = ucwords(str_replace('_', ' ', $val));
                 $error[$val] = $msg . ' Required';
             }

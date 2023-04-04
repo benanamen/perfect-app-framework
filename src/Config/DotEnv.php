@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 //From https://dev.to/fadymr/php-create-your-own-php-dotenv-3k2i
 // A different simple implementation https://dev.to/walternascimentobarroso/dotenv-in-php-45mn
 
@@ -37,7 +39,7 @@ class DotEnv
     /**
      *
      */
-    public function load() :void
+    public function load(): void
     {
         if (!is_readable($this->path)) {
             throw new RuntimeException(sprintf('%s file is not readable', $this->path));

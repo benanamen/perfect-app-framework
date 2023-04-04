@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace PerfectApp\Routing;
 
@@ -42,10 +44,8 @@ class Route
     {
         $pageBaseName = basename($this->page);
 
-        if (is_readable($this->includePath . $pageBaseName . '.php'))
-        {
-            if (in_array($pageBaseName, $this->allowedFiles, true))
-            {
+        if (is_readable($this->includePath . $pageBaseName . '.php')) {
+            if (in_array($pageBaseName, $this->allowedFiles, true)) {
                 return $this->includePath . $pageBaseName . '.php';
             }
             http_response_code(403);

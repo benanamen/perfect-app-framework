@@ -1,7 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace PerfectApp\Mail;
-
 
 /**
  * Interface MailSubmissionAgent
@@ -9,7 +10,6 @@ namespace PerfectApp\Mail;
  */
 interface MailSubmissionAgent
 {
-
     /**
      * Sends an e-mail to a single address
      *

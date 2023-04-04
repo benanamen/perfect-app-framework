@@ -1,3 +1,21 @@
+# CS Fixer
+
+```shell
+tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
+```
+
+# PHP Stan
+
+```shell
+vendor/bin/phpstan analyse  -l 6 src
+```
+
+```shell
+vendor/bin/phpstan analyse -l 9 tests
+```
+
+# Codeception
+
 ```bash
 php vendor/bin/codecept run
 ```

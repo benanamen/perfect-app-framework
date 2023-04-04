@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace PerfectApp\Utilities;
 
@@ -10,7 +12,6 @@ namespace PerfectApp\Utilities;
  */
 class Flash
 {
-
     /**
      * Add a message
      *
@@ -33,12 +34,10 @@ class Flash
      */
     public static function displayMessages(): void
     {
-        $flash = (new self)->getMessages();
+        $flash = (new self())->getMessages();
 
-        if ($flash)
-        {
-            foreach ($flash as $message)
-            {
+        if ($flash) {
+            foreach ($flash as $message) {
                 //TODO: Original format echo "<div class='col-md-6 offset-md-3'><div class='{$message['type']}'>{$message['body']}</div></div>";
                 echo "<div class='col-md-6 offset-md-3'><div class='alert alert-{$message['type']}'>{$message['body']}</div></div>";
             }
@@ -55,8 +54,7 @@ class Flash
     {
         $messages = [];
 
-        if (isset($_SESSION['flash_notifications']))
-        {
+        if (isset($_SESSION['flash_notifications'])) {
             $messages = $_SESSION['flash_notifications'];
             unset($_SESSION['flash_notifications']);
         }
