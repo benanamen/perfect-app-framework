@@ -4,8 +4,15 @@ namespace PerfectApp\Http;
 
 class Cookie
 {
+    /**
+     * @var array<string, mixed>
+     */
     private array $cookie;
 
+    /**
+     * Cookie constructor.
+     * @param array<string, mixed> $cookie
+     */
     public function __construct(array $cookie)
     {
         $this->cookie = $cookie;
@@ -18,7 +25,7 @@ class Cookie
 
     public function set(
         string $key,
-        $value,
+        string $value,
         int $expire = 0,
         string $path = '',
         string $domain = '',
@@ -34,7 +41,7 @@ class Cookie
         string $path = '',
         string $domain = ''
     ): void {
-        setcookie($key, null, time() - 3600, $path, $domain);
+        setcookie($key, '', time() - 3600, $path, $domain);
         unset($this->cookie[$key]);
     }
 }
