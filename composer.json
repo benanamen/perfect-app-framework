@@ -1,5 +1,5 @@
 {
-  "name": "krubio/router-request",
+  "name": "krubio/perfect-app-framework",
   "autoload": {
     "psr-4": {
       "PerfectApp\\": "src/"
@@ -14,13 +14,9 @@
     "codeception/codeception": "^5.0",
     "codeception/module-asserts": "*",
     "codeception/module-phpbrowser": "*",
-    "codeception/c3": "2.*",
     "ext-xdebug": "*",
     "phpstan/phpstan": "^1.10"
   },
   "config": {
-    "allow-plugins": {
-      "codeception/c3": true
-    }
   }
 }

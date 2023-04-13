@@ -17,6 +17,10 @@ vendor/bin/phpstan analyse -l 9 tests
 # Codeception
 
 ```bash
+php vendor/bin/codecept clean
+```
+
+```bash
 php vendor/bin/codecept run
 ```
 
